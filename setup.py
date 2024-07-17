@@ -13,13 +13,10 @@ Options.generate_cleanup_code=True
 
 link_args = ['-static-libgcc',
              '-static-libstdc++',
-            #  '-Wl,-Bstatic,--whole-archive',
-            #  '-lwinpthread',
-            #  '-lpthread',
-            #  '-Wl,--no-whole-archive'
+             '-Wl,-Bstatic,--whole-archive',
+             '-Wl,--no-whole-archive'
              ]
 
-# link_args=None
 
 #Extension args
 language ='c++'
@@ -38,7 +35,7 @@ include_dirs=["atpy",
 if platform.system() == "Linux":
     extra_compile_args = [ "-O2","-Wall", "-std=c++14","-fopenmp"]
     extra_link_args=["-fopenmp"]
-    # extra_link_args+=link_args
+    extra_link_args+=link_args
 elif platform.system() == "Windows":
     extra_compile_args = ["/O2", "/w", "/std:c++14","/openmp"]
     extra_link_args=["/NODEFAULTLIB:libcmt.lib"]
