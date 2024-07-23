@@ -90,8 +90,8 @@ cdef class Status:
                 self.stat.period=values
                 if values ==False:
                     print("warning: nonlineartermonly and computedrivingterms might be True?")
-                    #self.stat.nonlineartermonly=False
-                    #self.stat.computedrivingterms=False
+                    self.stat.nonlineartermonly=False
+                    self.stat.computedrivingterms=False
             elif "expand"==keys:
                 self.stat.expand=values
             elif "second_order_chrom"==keys:
