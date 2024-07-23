@@ -1601,8 +1601,6 @@ int CppBeamLine::computeSecondOrderChromaticities(const double dp){
 
 }
 
-
-
 int CppBeamLine::track(double* beams, size_t nbegin, size_t nend, size_t nturn_begin, size_t nturn_end ){
     size_t nturn0=nturn_begin, nturn1=nturn_end;
     size_t stat_no=0, first_end_pos=length;
@@ -1632,7 +1630,10 @@ int CppBeamLine::track(double* beams, size_t nbegin, size_t nend, size_t nturn_b
         }
         for(j=nbegin;j<first_end_pos+1;j++){
             line[j]->track(beams,&stat);
-            if(beams[LOSS]) break;
+            if(beams[LOSS]){
+                beams[LOSSPOS] = j;
+                break;
+            }
         }
         if(beams[LOSS]){
             beams[LOSSTURN]=nturn_begin;
@@ -1650,6 +1651,7 @@ int CppBeamLine::track(double* beams, size_t nbegin, size_t nend, size_t nturn_b
                 else{
                     beams[LOSSTURN]=k;
                 }
+                beams[LOSSPOS] = j;
                 return 0;
             }
         }
@@ -1665,6 +1667,7 @@ int CppBeamLine::track(double* beams, size_t nbegin, size_t nend, size_t nturn_b
                 line[j]->track(beams,&stat);
                 if(beams[LOSS]){
                     beams[LOSSTURN]=nturn_end;
+                    beams[LOSSPOS] = j;
                     return 0;
                 }
             }
@@ -1673,6 +1676,7 @@ int CppBeamLine::track(double* beams, size_t nbegin, size_t nend, size_t nturn_b
             break;
     }
     beams[LOSSTURN]=nturn_end+1;
+    beams[LOSSPOS] = -1;
     return 0;
 }
 
@@ -1680,6 +1684,7 @@ double CppBeamLine::get_DA_area(double* area_datas){
     
     size_t npara=stat.npara, max_machine_thread=1;
     double s=0;
+    double c_area_datas[100][2]={0};
     int alive_cnt[100]={0}; // maximum track lines is 100
     size_t nline=stat.track_lines, n_step=nline-1, track_turns=stat.track_turns; //
     matrix<double> beams(nline,TRK_NUM,0); //
@@ -1755,21 +1760,26 @@ double CppBeamLine::get_DA_area(double* area_datas){
         }
     }
     double normal_area=0, sigma_r=0, ave_r=0, sum_r2_i=0;
-    double r=0, r_prev=0, r_next=0, r_local_max=0;
+    double r=0, r_prev=0, r_next=0, r_local_max=0, r_min=1e10;
+    
     for(i=0;i<nline;i++){
         r=max_radiuses[i];
+        r_min = fmin(r_min, r);
         ave_r+=r;
         sum_r2_i+=r*r;
         if(i>0){
             normal_area+=0.5*sin(PI/n_step)*max_radiuses[i]*max_radiuses[i-1];
         }
-        area_datas[i]= r*cos(i*PI/n_step)*sigmax+ xo_begin ;
-        area_datas[nline+i]= r*sin(i*PI/n_step)*sigmay+ytol ;
+        if(area_datas != nullptr ){
+            area_datas[i]= r*cos(i*PI/n_step)*sigmax+ xo_begin ;
+            area_datas[nline+i]= r*sin(i*PI/n_step)*sigmay+ytol ;
+        }
     }
     ave_r/=nline;
     sigma_r=sqrt(sum_r2_i/nline - ave_r*ave_r);
     // normal_area-=0.5*n_step*PI/nline*sigma_r*sigma_r;
-    globals[DA]=normal_area;
+    // globals[DA]=normal_area;
+    globals[DA]=r_min*r_min;
     globals[DA_SIGMA]=sigma_r;
     return normal_area;
 }
