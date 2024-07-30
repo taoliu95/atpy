@@ -151,7 +151,7 @@ int CppOctupole::track(double* rin, const Status* stat, const bool reverse){
 int CppOctupole::_thin_track(double* rin, const double kick,const Status* stat){
     double x0=rin[0], y0=rin[2],dp=rin[5] ;
     double pnorm=1/(1+dp) ;
-    rin[1]= pnorm*kick*x0*(x0*x0 - 3.0*y0*y0) + rin[1];
+    rin[1]= -pnorm*kick*x0*(x0*x0 - 3.0*y0*y0) + rin[1];
     rin[3]= pnorm*kick*y0*(-3.0*x0*x0 + y0*y0) + rin[3];
         
     return 0;
