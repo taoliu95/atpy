@@ -114,8 +114,8 @@ cdef extern from "physics/utils/cppconstants.h":
         DETAX ,         DETAPX,        DBETAX,        DBETAY,       DALPHAX,        DALPHAY,       
         # DDETAX,     DDBETAX,    DDBETAY,    
         WX,      WY,  
-        LOW_QX             ,LOW_QY,            HIGH_QX             ,HIGH_QY,        SUM_SQR_QX,     SUM_SQR_QY,
-        INV_TAU,
+        LOW_QX             ,LOW_QY,            HIGH_QX             ,HIGH_QY,        SUM_SQR_QX,     SUM_SQR_QY, 
+        MIN_DP             ,MAX_DP,        INV_TAU,
         GLB_NUM
     
 
