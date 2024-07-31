@@ -297,8 +297,8 @@ enum GlobalToken: uint16_t
     DETAX ,         DETAPX,        DBETAX,        DBETAY,       DALPHAX,        DALPHAY,       
     // DDETAX,     DDBETAX,    DDBETAY,    
     WX,      WY,  
-    LOW_QX             ,LOW_QY,            HIGH_QX             ,HIGH_QY,        SUM_SQR_QX,     SUM_SQR_QY,
-    INV_TAU,
+    LOW_QX             ,LOW_QY,            HIGH_QX             ,HIGH_QY,        SUM_SQR_QX,     SUM_SQR_QY, 
+        MIN_DP             ,MAX_DP,        INV_TAU,
     GLB_NUM
 };
 
@@ -322,6 +322,7 @@ const map<int,string> GLOBALS_DICT= {{MASS0,"mass0"},{GAMMA,"gamma"},{ENERGY,"en
                         {WX, "Wx"}, {WY, "Wy"}, 
                         {LOW_QX, "low_Qx"}  ,{LOW_QY, "low_Qy"},  {HIGH_QX, "high_Qx"}  ,{HIGH_QY, "high_Qy"}, 
                         {SUM_SQR_QX, "sum_sqr_Qx"},     {SUM_SQR_QY, "sum_sqr_Qy"}, {INV_TAU, "inv_tau"},
+                        {MIN_DP, "min_dp"} ,{MAX_DP, "max_dp"},
                         // { GLB_NUM, "glb_num"} 
                         };
 enum {
