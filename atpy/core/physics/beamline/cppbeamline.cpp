@@ -1316,6 +1316,7 @@ int CppBeamLine::compute_off_momentum_sum_square(double dp){
     // sum_sqr_qy+=(ndiv-cnt)*1e10 ;
     dpmax1+=cnt*ddp;
     dpmax2*=cnt*ddp;
+    globals[MIN_DP]=-cnt*ddp;
     
     prev_nux = int_nux0 ;
     prev_nuy = int_nuy0 ;
@@ -1370,11 +1371,12 @@ int CppBeamLine::compute_off_momentum_sum_square(double dp){
     
     dpmax1+=cnt*ddp;
     dpmax2*=cnt*ddp;
+    globals[MAX_DP]=cnt*ddp;
     // sum_sqr_qx+=(ndiv-cnt)*1e10 ;
     // sum_sqr_qy+=(ndiv-cnt)*1e10 ;
 
-    globals[SUM_SQR_QX]=sum_sqr_qx/(2*ndiv)+dpmax1*1e10 ;
-    globals[SUM_SQR_QY]=sum_sqr_qy/(2*ndiv)+dpmax2*1e10 ;
+    globals[SUM_SQR_QX]=sum_sqr_qx/(2*ndiv) ;
+    globals[SUM_SQR_QY]=sum_sqr_qy/(2*ndiv) ;
     return 0;
 }
 
