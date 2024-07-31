@@ -17,7 +17,7 @@ cdef:
         "H11110@0", "H22000@0", "H00220@0", "H20110@0", "H31000@0", "H11200@0", 
                             "H00310@0", "H20200@0", "H20020@0", "H40000@0", "H00400@0" )
     tuple monitor_off_momentum_terms = ("lower_Qx", "high_Qy","lower_Qx", "high_Qy")
-    tuple off_momentum_sum_terms = ( "sum_sqr_Qx","sum_sqr_Qy" )
+    tuple off_momentum_sum_terms = ( "sum_sqr_Qx","sum_sqr_Qy" , "min_dp" , "max_dp" )
     tuple da_tracking_terms = ("DA" ,"DA_SIGMA")
     tuple ma_tracking_terms = ("MA" ,"MA_SIGMA")
 
