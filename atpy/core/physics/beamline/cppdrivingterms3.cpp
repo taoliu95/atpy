@@ -257,21 +257,21 @@ void computmdrivingTerms_fast_period(vector<CppComponent*>& bline, vector<Multip
                 /*  second-order terms from leading order effects of octupoles */
             /*  Ignoring a large number of terms that are not also driven by sextupoles */
                 // cout<<"computmdrivingTerms: "<<endl;
-                h22000 += 3*b4L*md[i].betax2/32*nPeriods;
-                h11110 -= 3*b4L*betax1*betay1/8*nPeriods;
-                h00220 += 3*b4L*md[i].betay2/32*nPeriods;
+                h22000 -= 3*b4L*md[i].betax2/32*nPeriods;
+                h11110 += 3*b4L*betax1*betay1/8*nPeriods;
+                h00220 -= 3*b4L*md[i].betay2/32*nPeriods;
             
                 // h22000 += 3*b4L*md[i].betax2/32*nPeriods;
                 // h11110 += -3*b4L*betax1*betay1/8*nPeriods;
                 // h00220 += 3*b4L*md[i].betay2/32*nPeriods;
-                h31000 += b4L*md[i].betax2/16*md[i].px[2]*PF(2,0);
-                h40000 += b4L*md[i].betax2/64*md[i].px[4]*PF(4,0);
-                h20110 += -3*b4L*betax1*betay1/16*md[i].px[2]*PF(2,0);
-                h11200 += -3*b4L*betax1*betay1/16*md[i].py[2]*PF(0,2);
-                h20020 += -3*b4L*betax1*betay1/32*md[i].px[2]*conj(md[i].py[2])*PF(2,-2);
-                h20200 += -3*b4L*betax1*betay1/32*md[i].px[2]*md[i].py[2]*PF(2,2);
-                h00310 += b4L*md[i].betay2/16*md[i].py[2]*PF(0,2);
-                h00400 += b4L*md[i].betay2/64*md[i].py[4]*PF(0,4);
+                h31000 -= b4L*md[i].betax2/16*md[i].px[2]*PF(2,0);
+                h40000 -= b4L*md[i].betax2/64*md[i].px[4]*PF(4,0);
+                h20110 -= -3*b4L*betax1*betay1/16*md[i].px[2]*PF(2,0);
+                h11200 -= -3*b4L*betax1*betay1/16*md[i].py[2]*PF(0,2);
+                h20020 -= -3*b4L*betax1*betay1/32*md[i].px[2]*conj(md[i].py[2])*PF(2,-2);
+                h20200 -= -3*b4L*betax1*betay1/32*md[i].px[2]*md[i].py[2]*PF(2,2);
+                h00310 -= b4L*md[i].betay2/16*md[i].py[2]*PF(0,2);
+                h00400 -= b4L*md[i].betay2/64*md[i].py[4]*PF(0,4);
             }
             if(b1L ){
                 h22000 -= 3*b1L*gammax*gammax/64*nPeriods;
@@ -310,19 +310,6 @@ void computmdrivingTerms_fast_period(vector<CppComponent*>& bline, vector<Multip
                             + (h10110*tmph01200 - h01200*tmph10110)    ) ;
             h00400 +=  ii*( (h10200*tmph01200 - h01200*tmph10200)     ) ;
             // + 9.0*h30000*tmph03000
-
-            // h22000 +=  -1.0/64*ii*( 3.0*h21000*tmph12000 + h30000*tmph03000 );
-            // h11110 +=  1.0/16*ii*( 2.0*h21000*tmph01110 + h10020*tmph01200 +  h10200*tmph01020);
-            // h00220 +=  -1.0/64*ii*( 4.0*h10110*tmph01110 + h10020*tmph01200 + h10200*tmph01020 );
-
-            // h31000 +=  1.0/64*ii*( 2.0*h30000*tmph12000   ) ;
-            // h40000 +=  1.0/64*ii*( h30000*tmph12000     ) ;
-            // h20110 +=  1.0/64*ii*( h30000*tmph01110 + h21000*tmph10110 + 2.0*h10200*tmph12000   ) ;
-            // h11200 +=  2.0*ii*( h10200*tmph12000 + h21000*tmph01200 + h10200*tmph01110 +  h10110*tmph01200      ) ;
-            // h20020 +=  ii*( h21000*tmph10020 + h30000*tmph01020 + 4.0*h10110*tmph10020  ) ;
-            // h20200 +=  ii*( h30000*tmph01200 + h10200*tmph21000 + 4.0*h10110*tmph10200   ) ;
-            // h00310 +=  1.0/32*ii*( h10200*tmph01110 + h10110*tmph01200    ) ;
-            // h00400 +=  1.0/64*ii*( h10200*tmph01200     ) ;
 
             // h10100 = h10010 ;
             // h11001 = h00111 =0.0;
